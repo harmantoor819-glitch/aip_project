@@ -1,0 +1,159 @@
+:root {
+  --primary-color: #6c5ce7;
+  --secondary-color: #a29bfe;
+  --bg-gradient-start: #0f2027;
+  --bg-gradient-mid: #203a43;
+  --bg-gradient-end: #2c5364;
+  --text-light: #f8f9fa;
+  --text-dark: #2d3436;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
+  background-attachment: fixed;
+  color: var(--text-light);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+  color: var(--text-light);
+}
+
+.glass-nav {
+  background: rgba(15, 32, 39, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-nav .navbar-brand, .glass-nav .nav-link {
+  color: var(--text-light) !important;
+}
+
+.glass-nav .nav-link:hover {
+  color: var(--secondary-color) !important;
+}
+
+/* Forms and Inputs */
+.glass-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  color: white;
+  border-radius: 8px;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+  color: white;
+}
+
+.glass-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Buttons */
+.btn-glass {
+  background: linear-gradient(45deg, var(--primary-color), #8e44ad);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px 24px;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-glass:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(108, 92, 231, 0.4);
+  color: white;
+}
+
+/* Cards (Prediction Results) */
+.career-card {
+  transition: all 0.3s ease;
+}
+
+.career-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  border-color: var(--secondary-color);
+}
+
+/* Dashboard Sidebar Layout */
+.dashboard-container {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  width: 250px;
+  min-height: calc(100vh - 60px);
+  border-radius: 0 16px 16px 0;
+  padding: 20px;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 12px 16px;
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: background 0.2s;
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--secondary-color);
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Micro-animations */
+.icon-pulse:hover {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Badges */
+.badge-glass {
+  background: rgba(108, 92, 231, 0.3);
+  border: 1px solid rgba(108, 92, 231, 0.5);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}

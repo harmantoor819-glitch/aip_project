@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - CareerAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg glass-nav p-3">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="index.html"><i class="fa-solid fa-compass text-primary me-2"></i>CareerAI <span class="badge bg-danger ms-2" style="font-size: 0.6em;">ADMIN</span></a>
+            <div class="d-flex align-items-center">
+                <a class="btn btn-outline-light rounded-pill px-3" href="dashboard.html">Back to Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5 fade-in">
+        <div class="row mb-5">
+            <div class="col-md-6 mb-4">
+                <div class="glass-panel p-4 d-flex align-items-center bg-transparent border-primary">
+                    <div class="bg-primary rounded p-3 me-4 text-white"><i class="fa-solid fa-users fa-2x"></i></div>
+                    <div>
+                        <h1 class="mb-0 fw-bold" id="totalUsers">-</h1>
+                        <span class="text-white-50">Registered Users</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="glass-panel p-4 d-flex align-items-center bg-transparent border-success">
+                    <div class="bg-success rounded p-3 me-4 text-white"><i class="fa-solid fa-bolt fa-2x"></i></div>
+                    <div>
+                        <h1 class="mb-0 fw-bold" id="totalPredictions">-</h1>
+                        <span class="text-white-50">Total Predictions Processed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="glass-panel p-4">
+            <h4 class="mb-4"><i class="fa-solid fa-database me-2 text-warning"></i>System Control</h4>
+            <p class="text-white-50">Admin management features such as updating career databases or deleting abusive users are typically deployed here. Connected to: <span class="badge bg-dark">smart_career_guidance</span></p>
+            <button class="btn btn-glass" disabled>Sync Career Data</button>
+            <button class="btn btn-outline-warning ms-2" disabled>View All Logs</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const userRole = localStorage.getItem('userRole');
+            if (userRole !== 'admin') {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/admin/stats');
+                const data = await res.json();
+                
+                if (data.success) {
+                    document.getElementById('totalUsers').textContent = data.stats.totalUsers;
+                    document.getElementById('totalPredictions').textContent = data.stats.totalPredictions;
+                }
+            } catch (err) {
+                console.error('Failed to load admin stats:', err);
+                document.getElementById('totalUsers').textContent = 'Error';
+                document.getElementById('totalPredictions').textContent = 'Error';
+            }
+        });
+    </script>
+</body>
+</html>
